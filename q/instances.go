@@ -37,8 +37,8 @@ func Cashier(qs [MAXWORKERS]*chan Customer, id, maxTime int, fCli, fServ *os.Fil
 		cur, ok := <-*qs[id]
 		if ok {
 			cur.MetricArrivedToCashierTime = time.Now()
-			workingTime := rand.Intn(maxTime)
-			time.Sleep(time.Duration(workingTime) * time.Millisecond)
+			//workingTime := rand.Intn(maxTime)
+			//time.Sleep(time.Duration(workingTime) * time.Millisecond)
 			cur.MetricLeftTime = time.Now()
 			// Customer, Cashier, Created, ArrivedQueue, ArrivedCashier, Left
 			msg := fmt.Sprintf("%d,%d,%d,%d,%d,%d,%d\n",
@@ -67,8 +67,8 @@ func FanoutUsersStatic(customers chan Customer, qs [MAXWORKERS]*chan Customer, m
 		userDest := rand.Intn(MINWORKERS)
 		minLen := len(*qs[userDest])
 
-		shoppingTime := rand.Intn(maxTime)
-		time.Sleep(time.Duration(shoppingTime) * time.Millisecond)
+		//shoppingTime := rand.Intn(maxTime)
+		//time.Sleep(time.Duration(shoppingTime) * time.Millisecond)
 
 		for i := 0; i < MINWORKERS; i++ {
 			if len(*qs[i]) < minLen {
@@ -100,8 +100,8 @@ func FanoutUsersDynamic(customers chan Customer, qs [MAXWORKERS]*chan Customer, 
 		userDest := rand.Intn(len(available))
 		minLen := len(*qs[available[userDest]])
 
-		shoppingTime := rand.Intn(maxTime)
-		time.Sleep(time.Duration(shoppingTime) * time.Millisecond)
+		//shoppingTime := rand.Intn(maxTime)
+		//time.Sleep(time.Duration(shoppingTime) * time.Millisecond)
 
 		// user looks at all the q's and considers, to wait or not
 		emptyQ := false
